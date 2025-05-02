@@ -1,39 +1,26 @@
--- queries.sql
--- Complete each mission by writing your SQL query below the instructions.
--- Don't forget to end each query with a semicolon ;
-
 SELECT * FROM regions;
 SELECT * FROM species;
 SELECT * FROM climate;
 SELECT * FROM observations;
 
+SELECT 
+    regions.name,
+    regions.country,
+    COUNT(DISTINCT species.id) AS total_species
+FROM observations
+JOIN species ON observations.species_id = species.id
+JOIN regions ON observations.region_id = regions.id
+GROUP BY regions.name, regions.country
+ORDER BY total_species DESC LIMIT 7;
 
--- MISSION 1
--- Your query here
-
--- MISSION 2
--- Your query here:
-
-
--- MISSION 3
--- Your query here:
-
-
--- MISSION 4
--- Your query here:
-
-
--- MISSION 5
--- Your query here:
+SELECT 
+    strftime('%m', observations.observation_date) AS month,
+    COUNT(observations.observation_date) AS total_meses
+FROM observations
+GROUP BY month
+ORDER BY total_meses DESC;
 
 
--- MISSION 6
--- Your query here:
 
 
--- MISSION 7
--- Your query here:
 
-
--- MISSION 8
--- Your query here:
