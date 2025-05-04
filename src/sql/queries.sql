@@ -58,4 +58,10 @@ FROM species
 LEFT JOIN  observations ON species.id = observations.species_id
 WHERE observations.species_id IS NULL;
 
-
+SELECT
+    observations.observation_date,
+    COUNT(DISTINCT observations.species_id) AS especies_dia
+FROM observations
+WHERE observations.count > 0
+GROUP BY observations.observation_date
+ORDER BY especies_dia DESC LIMIT 20;
